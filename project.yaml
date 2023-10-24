@@ -1,0 +1,38 @@
+# // Auto-generated , DO NOT EDIT
+specVersion: 1.0.0
+version: 0.0.1
+name: Fan-Tech-Subgraph
+description: FT
+runner:
+  node:
+    name: '@subql/node-ethereum'
+    version: '>=3.0.0'
+  query:
+    name: '@subql/query'
+    version: '*'
+schema:
+  file: ./schema.graphql
+network:
+  chainId: '5000'
+  endpoint:
+    - 'https://rpc.mantle.xyz'
+    - 'https://mantle.public-rpc.com'
+    - 'https://mantle.drpc.org'
+dataSources:
+  - kind: ethereum/Runtime
+    startBlock: 16512000
+    options:
+      abi: erc20
+      address: '0x53167401aeebFf5677C31E1DDA945628422D7Ed2'
+    assets:
+      erc20:
+        file: ./abis/FT_17-10.json
+    mapping:
+      file: ./dist/index.js
+      handlers:
+        - kind: ethereum/TransactionHandler
+          handler: handleInitShares
+          filter:
+            function: >-
+              initializeShares(address referrer, uint256 _initialShares, uint256
+              _blockTime, uint256 nonce, bytes signature)
